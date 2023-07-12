@@ -16,6 +16,11 @@ public class BookManagerController {
 	@Autowired
 	private BookManagerService service;
 	
+	@RequestMapping(value = "/regist_view.do", method = RequestMethod.GET)
+	public String registView() {
+		return "./jsp/manager/book_regist";
+	}
+	
 	@RequestMapping(value = "/regist.do", method = RequestMethod.POST)
 	public ModelAndView registBook(@ModelAttribute("book") BookVO book) {
 		ModelAndView mav = new ModelAndView();
