@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Built-By: ￪ﾸﾈ￬ﾠﾕ￬ﾂﾰ2_PC07
+Built-By: LeeJH
 Build-Jdk: 11.0.19
 Created-By: Maven Integration for Eclipse
 
