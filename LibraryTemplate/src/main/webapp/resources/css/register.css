@@ -1,0 +1,305 @@
+.main-container {
+    /* padding-top: 30px; */
+}
+
+/* ------------ header ------------ */
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  
+    padding: 40px 20px;
+  
+    width: 100%;
+    height: 50px;
+}
+
+.brand-logo a {
+  font-size: 30px;
+  font-weight: 600;
+  color: rgb(7, 7, 7);
+}
+
+.menu-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  width: 50%;
+  height: 50px;
+}
+
+.menu-container li a {
+  font-size: 20px;
+  font-weight: 600;
+  color: rgb(5, 5, 5);
+}
+
+.menu-container li a:hover {
+  text-shadow: 0px 0px 15px #141414;
+}
+
+.account-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.account-container li a {
+  font-size: 18px;
+  font-weight: 600;
+  color: rgb(5, 5, 5);
+}
+
+.account-container li:nth-child(1)::after {
+  content: "";
+  height: 100%;
+  margin: 0px 5px;
+  border-left: 2px solid white;
+}
+
+.register-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 0px auto;
+  border-radius: 2px;
+
+  padding: 30px 50px;
+  width: 800px;
+
+  background-color: white;
+  box-shadow: 0px 0px 5px 1px white;
+}
+
+.register-content, 
+.register-condition {
+  width: 48%;
+
+}
+
+.register-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.register-title {
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
+.register-group {
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+  height: 56px;
+}
+
+.register-group label {
+  padding-top: 7px;
+}
+
+.input-group {
+  width: 72%;
+}
+
+.register-inputs {
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+.address-api-area {
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.register-address-button {
+  width: 80px;
+
+  background-color: black;
+
+  color: white;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.register-address-button:hover {
+  width: 80px;
+
+  background-color: rgb(255, 255, 255);
+
+  color: rgb(0, 0, 0);
+  font-weight: 600;
+
+  cursor: pointer;
+
+}
+
+.address-group {
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+  height: 180px;
+}
+
+.address-api-subarea {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.register-address-input {
+  margin-bottom: 5px;
+  width: 73%;
+}
+
+.register-error {
+  margin-bottom: 10px;
+  font-size: 11px;
+  color: red;
+}
+
+.condition-text {
+  width: 100%;
+  height: 535px;
+
+  font-size: 12px;
+
+  resize: none;
+
+  overflow-y: auto;
+}
+
+.register-submit {
+  width: 90px;
+  margin-right: 15px;
+  font-weight: 600;
+}
+
+.save-button {
+  margin-right: 45px;
+}
+
+/* --------------------- 추가정보 --------------------- */
+
+.register-add-area {
+    display: flex;
+    justify-content: space-between;
+    margin: 0px auto;
+    border-radius: 2px;
+  
+    padding: 30px 50px;
+    width: 800px;
+  
+    background-color: white;
+    box-shadow: 0px 0px 5px 1px white;
+}
+
+.add-content form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: space-between;
+
+    width: 100%;
+    
+    /* background-color: aqua; */
+}
+
+.add-top {
+    display: flex;
+    justify-content: flex-start;
+    align-items: space-between;
+    width: 800px;
+    height: 300px;
+}
+
+.add-content-left-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+
+    margin-right: 25px;
+
+    width: 336px;
+
+    /* background-color: burlywood; */
+}
+
+.sub-user-content {
+    border-bottom: 1px solid #dbdbdb;
+
+    width: 100%;
+    height: 72px;
+
+    margin-bottom: 15px;
+
+    border-radius: 5px;
+
+}
+
+.add-subtitle {
+    font-size: 14px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+
+    font-weight: 600;
+}
+
+.job-add {
+    width: 20%;
+    height: 72px;
+}
+
+.job-select {
+
+}
+
+.job-sub {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    width: 100%;
+    height: 81px;
+}
+.add-subtitle-radio {
+    margin-bottom: 10px;
+}
+
+.sub-textarea {
+  width: 340px;
+  height: 255px;
+
+
+  font-size: 12px;
+
+  resize: none;
+
+  overflow-y: auto;
+}
+
+.add-bottom {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  width: 700px;
+  height: 50px;
+}
+
+/* .add-content-area {
+  width: 48%;
+
+}
+
+.add-content-area {
+  display: flex;
+  flex-direction: column;
+} */

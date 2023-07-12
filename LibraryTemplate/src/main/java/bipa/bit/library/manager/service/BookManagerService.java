@@ -1,5 +1,7 @@
 package bipa.bit.library.manager.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,5 +18,13 @@ public class BookManagerService {
 		flag = dao.insertBook(book);
 		
 		return flag;
+	}
+	
+	public ArrayList<BookVO> asdminSelectAllList() {
+		ArrayList<BookVO> list = new ArrayList<BookVO>();
+		
+		list = dao.adminSelectAllList();
+		
+		return list;
 	}
 }

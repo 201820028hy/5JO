@@ -1,0 +1,210 @@
+.main-container {
+    /* padding-top: 30px; */
+}
+
+/* ------------ header ------------ */
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  
+    padding: 40px 20px;
+  
+    width: 100%;
+    height: 50px;
+}
+
+.brand-logo a {
+  font-size: 30px;
+  font-weight: 600;
+  color: rgb(7, 7, 7);
+}
+
+.menu-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  width: 50%;
+  height: 50px;
+}
+
+.menu-container li a {
+  font-size: 20px;
+  font-weight: 600;
+  color: rgb(5, 5, 5);
+}
+
+.menu-container li a:hover {
+  text-shadow: 0px 0px 15px #141414;
+}
+
+.account-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.account-container li a {
+  font-size: 18px;
+  font-weight: 600;
+  color: rgb(5, 5, 5);
+}
+
+.account-container li:nth-child(1)::after {
+  content: "";
+  height: 100%;
+  margin: 0px 5px;
+  border-left: 2px solid white;
+}
+
+.main-account-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 700px;
+}
+
+
+/* .form-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 500px;
+} */
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  
+    width: 450px;
+    height: 420px;
+
+
+    border: 1px solid black;
+  
+    background-color: rgb(255, 255, 255, 0.7);
+}
+
+.login-title {
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+.login-group {
+    display: flex;
+    flex-direction: column;
+  
+    margin-bottom: 15px;
+    width: 350px;
+}
+
+.login-group label {
+    margin-bottom: 5px;
+}
+  
+.login-inputs {
+    height: 40px;
+    font-size: 16px;
+    text-align: center;
+
+    border: 1px solid black;
+}
+
+.login-error {
+    font-size: 12px;
+    color: red;
+}
+  
+.button-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    width: 350px;
+}
+
+.button-group button {
+    margin-bottom: 10px;
+    width: 100%;
+    font-weight: 600;
+}
+
+.login-submit {
+    height: 45px;
+
+    font-size: 18px;
+    color: black;
+    background-color: #ffffff;
+    border: 1px solid black;
+}
+
+.kakao-login {
+    color: rgb(0, 0, 0);
+    background-color: #fff82c;
+    border: 1px solid #000000;
+}
+
+.button-group-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 350px;
+}
+
+.footer-button {
+    color: #002f6c;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 0;
+
+    width: 110px;
+    height: 35px;
+
+    border: 1px solid #000000;
+}
+
+
+
+#index-footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 250px;
+
+    background-color: white;
+
+    border-top: 1px solid black;
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    width: 100%;
+    height: 200px;
+}
+
+.index-up-button {
+    width: 200px;
+    height: 40px;
+    background-color: rgba(2, 2, 2, 0.5);
+
+    border: 1px solid black;
+
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+}
