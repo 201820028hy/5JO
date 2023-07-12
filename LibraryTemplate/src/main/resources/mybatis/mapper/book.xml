@@ -18,6 +18,7 @@
 		<result property="bookStar" column="book_star"/>
 		<result property="bookStartCnt" column="book_star_cnt"/> 
 	</resultMap>
+	<!-- 수정이요 -->
 	
 	<select id="selectAllList" resultMap="bookMap" resultType="bookCopyVO">
 		<![CDATA[
