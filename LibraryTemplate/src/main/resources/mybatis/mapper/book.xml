@@ -13,7 +13,6 @@
 		<result property="bookContent" column="book_content"/>
 		<result property="bookCategory" column="book_category"/>
 		<result property="bookImg" column="book_img"/>
-		
 		<result property="bookLike" column="book_like"/>
 		<result property="bookDlike" column="book_dlike"/>
 		<result property="bookStar" column="book_star"/>
