@@ -16,7 +16,7 @@
 		<result property="bookLike" column="book_like"/>
 		<result property="bookDlike" column="book_dlike"/>
 		<result property="bookStar" column="book_star"/>
-		<result property="bookStartCnt" column="book_star_cnt"/>
+		<result property="bookStartCnt" column="book_star_cnt"/> 
 	</resultMap>
 	
 	<select id="selectAllList" resultMap="bookMap" resultType="bookCopyVO">
