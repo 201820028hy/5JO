@@ -11,7 +11,6 @@
 		<result property="publishDate" column="book_published_date"/>
 		<result property="bookPosition" column="book_position"/>
 		<result property="bookStaus" column="book_status"/>
-		
 	</resultMap>
 	
 	<select id="selectAllList" resultMap="bookMap" resultType="bookCopyVO">
