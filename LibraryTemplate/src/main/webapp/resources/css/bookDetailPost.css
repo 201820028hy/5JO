@@ -1,0 +1,544 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding-top: 50px;
+    width: 100%;
+    height: 100%;
+}
+
+/* ------------ header ------------ */
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 40px 20px;
+
+    width: 100%;
+    height: 50px;
+}
+
+.brand-logo a {
+    font-size: 30px;
+    font-weight: 600;
+    color: rgb(7, 7, 7);
+}
+
+.menu-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    width: 50%;
+    height: 50px;
+}
+
+.menu-container li a {
+    font-size: 20px;
+    font-weight: 600;
+    color: rgb(5, 5, 5);
+}
+
+.menu-container li a:hover {
+    text-shadow: 0px 0px 15px #141414;
+}
+
+.account-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.account-container li a {
+    font-size: 18px;
+    font-weight: 600;
+    color: rgb(5, 5, 5);
+}
+
+.account-container li:nth-child(1)::after {
+    content: "";
+    height: 100%;
+    margin: 0px 5px;
+    border-left: 2px solid white;
+}
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+
+    border-radius: 10px;
+    padding: 30px;
+    width: 100%;
+    min-height: 830px;
+    height: 100%;
+
+    background-color: #ebebeb;
+}
+
+.content-up {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 600px;
+
+    margin-bottom: 30px;
+
+    background-color: rgb(255, 255, 255);
+}
+
+.content-title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 100%;
+    height: 50px;
+
+    font-size: 24px;
+    font-weight: 600;
+
+    padding-left: 18px;
+
+}
+
+.info-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 1300px;
+    height: 450px;
+
+    border-radius: 10px;
+
+    background-color: #ebebeb;
+}
+
+.img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 360px;
+    height: 420px;
+
+    border: 1px solid black;
+
+}
+
+.book-img {
+    width: 340px;
+    height: 400px;
+}
+
+.right-contents {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    width: 900px;
+    height: 100%;
+}
+
+.right-contents-upside {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    width: 100%;
+    height: 300px;
+}
+
+.book-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+
+    width: 700px;
+    height: 100%;
+}
+
+.info-text b {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.info-text {
+    font-size: 20px;
+}
+
+.book-star {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.star-icon-area {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 150px;
+    height: 30px;
+
+    padding-left: 7px;
+}
+
+.fa-star {
+    font-size: 15px;
+    padding-right: 2px;
+
+    color:rgb(100, 100, 255)
+}
+
+.like-and-dislike {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding-top: 15px;
+
+    width: 130px;
+    height: 100%;
+}
+
+.like-and-dislike span {
+    padding-right: 10px;
+    font-size: 20px;
+
+    padding-top: 5px;
+
+    padding-left: 5px;
+
+    font-weight: 600;
+}
+
+.like-and-dislike span:last-child {
+    padding-right: 0px;
+    font-size: 20px;
+
+    font-weight: 600;
+}
+
+.fa-thumbs-up {
+    font-size: 30px;
+    color:rgb(100, 100, 255)
+}
+
+.fa-thumbs-down {
+    font-size: 30px;
+    color:rgb(255, 100, 100)
+}
+
+.right-contents-bottomside {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: flex-end;
+    align-items: center;
+
+    width: 100%;
+    height: 135px;
+}
+
+.bottom-title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 100%;
+    height: 30px;
+}
+
+.bottom-title p {
+    font-size: 20px;
+    font-weight: 600;
+
+    padding-left: 18px;
+}
+
+.bottom-story p {
+    font-size: 16px;
+    padding-left: 18px;
+    padding-right: 18px;
+    line-height: 1.5;
+}
+
+.favorite-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100px;
+}
+
+.favorite-box {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    width: 540px;
+    height: 80px;
+
+    border-radius: 10px;
+
+    border: 1px solid black;
+
+    background-color: #ebebeb;
+}
+
+.favorite-star {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.favorite-star-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+}
+
+.favorite-star-title {
+    font-size: 20px;
+    font-weight: 600;
+
+    width: 150px;
+}
+
+#star1 {
+    font-size: 25px;
+    padding-right: 7px;
+    color: white;
+}
+
+.favorite-like-dislike-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+}
+
+.content-down {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 100%;
+    height: 500px;
+
+    /* margin-bottom: 30px; */
+
+    background-color: rgb(255, 255, 255);
+}
+
+.review-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 120px;
+    height: 100%;
+}
+
+.post-create-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    width: 1300px;
+    height: 100px;
+
+    border-radius: 10px;
+
+    border: 1px solid black;
+    
+    background-color: #ebebeb;
+
+    margin-bottom: 30px;
+}
+
+#post-create-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 1300px;
+    height: 100px;
+}
+
+#post-create-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1300px;
+    height: 50px;
+
+}
+
+.post-create {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    width: 1300px;
+    height: 50px;
+
+
+}
+
+.post-create-title p {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.post-input-box {
+    width: 850px;
+}
+
+.review-area span {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.post-create-button {
+    font-weight: 600;
+    font-size: 18px;
+
+
+    width: 120px;
+}
+
+.post-create-button:hover {
+    font-weight: 600;
+    font-size: 18px;
+
+    width: 120px;
+
+    color: white;
+    background-color: black;
+}
+
+.posted-user-content-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 1300px;
+    height: 100%;
+
+    border: 1px solid black;
+
+    background-color: #ebebeb;
+
+    box-sizing: content-box;
+
+    overflow-x: scroll;
+}
+
+.posted-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1300px;
+    height: 50px;
+
+
+    border-top: 2px solid black;
+
+    padding-left: 42px;
+    padding-right: 42px;
+
+    background-color: white;
+
+    line-height: 1.5;
+}
+
+.post-userid-area {
+    font-size: 16px;
+}
+
+.hidden-user-info-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+}
+
+.hidden-user-info-area form {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 100%;
+    height: 50px;
+
+    padding-left: 32px;
+
+    background-color: rgb(255, 220, 220);
+}
+
+.hidden-userid {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    width: 300px;
+    height: 50px;
+}
+
+.hidden-password {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    width: 300px;
+    height: 50px;
+}
+
+.hidden-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 100%;
+}
+
+.hidden-button button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100px;
+    font-size: 18px;
+    font-weight: 600;
+
+    height: 30px;
+}
+
+.hidden-userid-title {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.hidden-password-title {
+    font-size: 16px;
+    font-weight: 600;
+}

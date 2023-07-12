@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 내가 쓸 태그들 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Config 3.0//EN"
+  "http://mybastis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.book">
+	<resultMap id="bookMap" type="bookCopyVO">
+		<id property="bookSeq" column="book_seq"></id>
+		<result property="isbn" column="book_isbn"/>
+		<result property="title" column="book_title"/>
+		<result property="author" column="book_author"/>
+		<result property="publishDate" column="book_published_date"/>
+		<result property="bookPosition" column="book_position"/>
+		<result property="bookStaus" column="book_status"/>
+	</resultMap>
+	
+	<select id="selectAllList" resultMap="bookMap" resultType="bookCopyVO">
+		<![CDATA[
+			select
+				copy.*,
+				info.*
+			from book_info info
+			join book_copy copy on info.book_isbn = copy.book_isbn;
+		]]>
+	</select>
+	
+	<select id="selectOneBook" parameterType="int" resultMap="bookMap" resultType="bookCopyVO">
+		select
+			*
+		from book_info info
+		join book_copy copy on info.book_isbn = copy.book_isbn
+		where book_seq = #{bookSeq}
+	</select>
+	
+	<update id="updateBook" parameterType="bookCopyVO">
+		update book_info set #{bookTitle}
+	</update>
+</mapper>
