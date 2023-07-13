@@ -5,19 +5,30 @@
 <mapper namespace="mapper.book">
 	<resultMap id="bookMap" type="bookCopyVO">
 		<id property="bookSeq" column="book_seq"></id>
-		<result property="isbn" column="book_isbn"/>
-		<result property="title" column="book_title"/>
-		<result property="author" column="book_author"/>
-		<result property="publishDate" column="book_published_date"/>
-		<result property="bookPosition" column="book_position"/>
-		<result property="bookStaus" column="book_status"/>
+		<result property="bookIsbn" column="book_isbn"/>
+		<result property="bookTitle" column="book_title"/>
+		<result property="bookAuthor" column="book_author"/>
+		<result property="bookPublishDate" column="book_published_date"/>
+		<result property="bookPublisher" column="book_publisher"/>
+		<result property="bookContent" column="book_content"/>
+		<result property="bookCategory" column="book_category"/>
+		<result property="bookImg" column="book_img"/>
+		<result property="bookLike" column="book_like"/>
+		<result property="bookDlike" column="book_dlike"/>
+		<result property="bookStar" column="book_star"/>
+		<result property="bookStartCnt" column="book_star_cnt"/> 
 	</resultMap>
+	<!-- 수정이요 -->
 	
 	<select id="selectAllList" resultMap="bookMap" resultType="bookCopyVO">
 		<![CDATA[
 			select
-				copy.*,
-				info.*
+				copy.book_seq,
+				info.*,
+				copy.book_like,
+				copy.book_dlike,
+				copy.book_star,
+				copy.book_star_cnt
 			from book_info info
 			join book_copy copy on info.book_isbn = copy.book_isbn;
 		]]>

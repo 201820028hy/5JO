@@ -67,7 +67,7 @@
 						</div>
 						<div class="book-info">
 							<div class="book-code">소록-990</div>
-							<a href="detail.do?bookSeq=1"><h3 class="book-name">스프링 부트와 AWS로 혼자 구현하는 웹 서비스</h3></a>
+							<a href="detail.do?bookSeq=2"><h3 class="book-name">스프링 부트와 AWS로 혼자 구현하는 웹 서비스</h3></a>
 							<div class="info-text book-author">
 								<b>저자: </b>이동욱
 							</div>
