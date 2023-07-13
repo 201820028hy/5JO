@@ -4,5 +4,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="bipa.bit.library.book.vo.BookVO" alias="bookCopyVO"></typeAlias>
+		<typeAlias type="bipa.bit.library.book.vo.CommentVO" alias="commentCopyVO"></typeAlias>
 	</typeAliases>
+
 </configuration>

@@ -76,6 +76,16 @@ public class BookVO {
 	public int getBookStartCnt() {
 		return bookStartCnt;
 	}
+
+	@Override
+	public String toString() {
+		return "BookVO [bookSeq=" + bookSeq + ", bookIsbn=" + bookIsbn + ", bookTitle=" + bookTitle + ", bookAuthor="
+				+ bookAuthor + ", bookPublishDate=" + bookPublishDate + ", bookPublisher=" + bookPublisher
+				+ ", bookContent=" + bookContent + ", bookCategory=" + bookCategory + ", bookImg=" + bookImg
+				+ ", bookLike=" + bookLike + ", bookDlike=" + bookDlike + ", bookStar=" + bookStar + ", bookStartCnt="
+				+ bookStartCnt + "]";
+	}
+	
 	
 	
 }

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import bipa.bit.library.book.vo.BookVO;
+import bipa.bit.library.book.vo.CommentVO;
 
 @Repository
 public class BookDAO {
@@ -47,33 +48,21 @@ public class BookDAO {
 		return list;
 	}
 	
-//	private void closeConnection(ResultSet rs, PreparedStatement pstmt, Connection con) {
-//		if(rs != null) {
-//			try {
-//				rs.close();
-//			} catch (SQLException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
-//		
-//		if(pstmt != null) {
-//			try {
-//				pstmt.close();
-//			} catch (SQLException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
-//		
-//		if(con != null) {
-//			try {
-//				con.close();
-//			} catch (SQLException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
-//	}
+	public ArrayList<CommentVO> selectBookComment(int parseInt){
+		ArrayList<CommentVO> list = null;
+		list = (ArrayList)sqlSession.selectList("mapper.comment.selectCommentBySeq",parseInt);
+		return list;
+	}
+	
+	public boolean insertComment(CommentVO comment) {
+		boolean flag = false;
+		
+		int result = sqlSession.insert("mapper.comment.insertComment",comment);
+		if(result>0) {
+			flag = true;
+		}
+		
+		return flag;
+	}
 	
 }
