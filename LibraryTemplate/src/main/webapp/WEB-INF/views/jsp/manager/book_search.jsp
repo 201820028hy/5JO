@@ -97,7 +97,7 @@
 	                                    <td><input type="checkbox" class="delete-checkbox"></td>
 	                                    <td class="book-id">${list.bookSeq}</td>
 	                                    <td>${list.bookIsbn}</td>
-	                                    <td><a href="">${list.bookTitle}</a></td>
+	                                    <td><a href="detail.do?bookSeq=${list.bookSeq }">${list.bookTitle}</a></td>
 	                                    <td>${list.bookAuthor}</td>
 	                                    <td>${list.bookPublisher}</td>
 	                                    <td>${list.bookPublishDate}</td>

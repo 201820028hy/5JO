@@ -22,14 +22,59 @@
 	<select id="adminSelectAllList" resultMap="adminBookMap" resultType="bookCopyVO">
 		<![CDATA[
 			 select
-            copy.book_seq,
-            info.*,
-            copy.book_like,
-            copy.book_dlike,
-            copy.book_star,
-            copy.book_star_cnt
-         from book_info info
-         join book_copy copy on info.book_isbn = copy.book_isbn;
+	            copy.book_seq,
+	            info.*,
+	            copy.book_like,
+	            copy.book_dlike,
+	            copy.book_star,
+	            copy.book_star_cnt
+	         from book_info info
+	         join book_copy copy on info.book_isbn = copy.book_isbn;
 		]]>
 	</select>
+	
+	<!-- 혜윤 개발 시작 -->
+	<select id="selectAllCategorys" resultType="string">
+		select
+			book_category
+		from book_info
+		group by book_category
+		order by book_category asc
+	</select>
+	
+	<select id="selectBookByBookSeq" parameterType="hashmap" resultMap="adminBookMap" resultType="bookCopyVO">
+		select
+			(select book_seq from book_copy where book_seq = #{bookSeq}) as book_seq,
+			book_isbn,
+			book_title,
+			book_author,
+			book_published_date,
+			book_publisher,
+			book_content,
+			book_category,
+			book_img
+		from book_info info
+		where book_isbn = (select book_isbn from book_copy where book_seq = #{bookSeq})
+	</select>
+	
+	<insert id="insertBookInfo" parameterType="bookCopyVO">
+		insert into book_info(book_isbn, book_title, book_author, book_published_date, book_publisher, book_content, book_category, book_img)
+		values(#{bookIsbn}, #{bookTitle}, #{bookAuthor}, #{bookPublishDate}, #{bookPublisher}, #{bookContent}, #{bookCategory}, #{bookImg})
+	</insert>
+	
+	<insert id="insertBookCopy" parameterType="bookCopyVO">
+		insert into book_copy(book_isbn) values(#{bookIsbn})
+	</insert>
+	
+	<update id="updateBookInfo" parameterType="bookCopyVO">
+		update book_info set
+			book_title = #{bookTitle},
+			book_author = #{bookAuthor},
+			book_published_date = #{bookPublishDate},
+			book_publisher = #{bookPublisher},
+			book_content = #{bookContent},
+			book_category = #{bookCategory},
+			book_img = #{bookImg}
+		where book_isbn = (select book_isbn from book_copy where book_seq = #{bookSeq})
+	</update>
 </mapper>

@@ -1,0 +1,264 @@
+.main-container {
+    display: flex;
+
+    margin: 20px auto 0px;
+    width: 1400px;
+    height: 930px;
+
+    background-color: white;
+    box-shadow: 1px 1px 5px 1px black;
+}
+
+.content-container {
+    width: 100%;
+    height: 100%;
+}
+
+.content-title {
+    padding: 70px 70px 20px;
+
+    height: 120px;
+    font-size: 20px;
+}
+
+.content-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 70px;
+    width: 100%;
+}
+
+/* ------------ header ------------ */
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 40px 20px;
+
+    width: 100%;
+    height: 50px;
+}
+
+.brand-logo a {
+    font-size: 30px;
+    font-weight: 600;
+    color: rgb(7, 7, 7);
+}
+
+.menu-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    width: 50%;
+    height: 50px;
+}
+
+.menu-container li a {
+    font-size: 20px;
+    font-weight: 600;
+    color: rgb(5, 5, 5);
+}
+
+.menu-container li a:hover {
+    text-shadow: 0px 0px 15px #141414;
+}
+
+.account-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.account-container li a {
+    font-size: 18px;
+    font-weight: 600;
+    color: rgb(5, 5, 5);
+}
+
+.account-container li:nth-child(1)::after {
+    content: "";
+    height: 100%;
+    margin: 0px 5px;
+    border-left: 2px solid white;
+}
+
+.left-aside {
+    width: 20%;
+    height: 100%;
+
+    border-right: 4px solid #202020;
+    background-color: #202020;
+}
+
+.aside-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-bottom: 3px solid #202020;
+
+    width: 100%;
+    height: 100px;
+    background-color: white;
+}
+
+.title-text-h1 {
+    font-size: 24px;
+    color: #202020;
+}
+
+.main-menu {
+    padding: 20px 0px;
+    background-color: #101010;
+    color: white;
+}
+
+.title-text-h2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-top: 1px solid #505050;
+    border-bottom: 1px solid #505050;
+
+    height: 50px;
+    font-size: 18px;
+}
+
+.sub-menu a li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 50px;
+
+    font-size: 14px;
+    color: white;
+}
+
+.sub-menu-last {
+    border-bottom: 1px solid #505050;
+}
+
+.sub-menu a li:hover {
+    background-color: #505050;
+}
+
+/* --------------------------------------- */
+.content-main {
+    flex-direction: row;
+    justify-content: space-between;
+    height: 780px;
+}
+
+.content-left,
+.content-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    border: 1px solid #202020;
+    padding: 30px;
+    width: 47%;
+    height: 100%;
+}
+
+.item-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+/* 혜윤 작업 시작 */
+.item-group-dashed {
+	border-bottom: 1px dashed #dfdfdf;
+	margin-bottom: 20px;
+}
+.item-group-dashed p {
+	padding-left: 5px;
+	margin-bottom: 10px;
+}
+/* 혜윤 작업 끝 */
+
+.modification-label {
+    margin-bottom: 5px;
+    padding-left: 5px;
+    font-weight: 600;
+    color: #202020;
+}
+
+.modification-input {
+    height: 35px;
+}
+
+.error-message {
+    margin-top: 7px;
+    padding-left: 5px;
+    color: red;
+    font-size: 12px;
+}
+
+.modification-button {
+    margin-top: 10px;
+    width: 100%;
+    height: 40px;
+
+    font-weight: 600;
+}
+
+.img-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+    width: 100%;
+    height: 100%;
+}
+
+.img-file {
+    display: none;
+}
+
+.img-add-button {
+    margin-bottom: 20px;
+    width: 100%;
+    height: 40px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 20px;
+    width: 100%;
+    height: 400px;
+
+    overflow: hidden;
+}
+
+.book-img {
+    height: 100%;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.img-modification-button,
+.img-cancel-button {
+    width: 48%;
+    height: 40px;
+
+    font-weight: 600;
+}

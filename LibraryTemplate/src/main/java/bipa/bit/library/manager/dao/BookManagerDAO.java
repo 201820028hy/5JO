@@ -5,12 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import bipa.bit.library.book.vo.BookVO;
 
@@ -20,17 +22,6 @@ public class BookManagerDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public boolean insertBook(BookVO book) {
-		boolean flag = false;
-		
-//		StringBuilder infoSql = new StringBuilder("insert into book_info(book_isbn, book_title, book_author, book_publisher, book_published_date, book_content, book_category, book_img) ")
-//				.append("values(?, ?, ?, ?, ?, ?, ?, ?);");
-//		StringBuilder copySql = new StringBuilder("insert into book_copy(book_isbn) ")
-//				.append("values(?);");
-		
-		return flag;
-	}
-	
 	public ArrayList<BookVO> adminSelectAllList() {
 		ArrayList<BookVO> list = new ArrayList<BookVO>();
 //		StringBuilder infoSql = new StringBuilder("select * from book_info info join book_copy copy on info.book_isbn = copy.book_isbn;");
@@ -38,5 +29,44 @@ public class BookManagerDAO {
 		list = (ArrayList) sqlSession.selectList("mapper.admin.book.adminSelectAllList");
 		System.out.println(list);
 		return list;
+	}
+	
+	/*혜윤 개발 시작*/
+	public ArrayList<String> selectAllCategorys() {
+		ArrayList<String> list = new ArrayList<String>();
+		
+		list = (ArrayList) sqlSession.selectList("mapper.admin.book.selectAllCategorys");
+		
+		return list;
+	}
+	
+	public BookVO selectBookByBookSeq(int bookSeq, String bookIsbn) {
+		BookVO book = new BookVO();
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("bookSeq", String.valueOf(bookSeq));
+		map.put("bookIsbn", bookIsbn);
+		book = sqlSession.selectOne("mapper.admin.book.selectBookByBookSeq", bookSeq);
+		
+		return book;
+	}
+	
+	@Transactional
+	public int insertBook(BookVO book) {
+		int cnt = 0;
+		
+		cnt += sqlSession.insert("mapper.admin.book.insertBookInfo", book);
+		cnt += sqlSession.insert("mapper.admin.book.insertBookCopy", book);
+		
+		return cnt;
+	}
+	
+	@Transactional
+	public int updateBook(BookVO book) {
+		int cnt = 0;
+		
+		cnt += sqlSession.update("mapper.admin.book.updateBookInfo", book);
+		
+		return cnt;
 	}
 }
