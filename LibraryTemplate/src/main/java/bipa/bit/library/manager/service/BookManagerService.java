@@ -30,10 +30,18 @@ public class BookManagerService {
 		return list;
 	}
 	
-	public BookVO detailBook(int bookSeq, String bookIsbn) {
+	public BookVO detailBook(int bookSeq) {
 		BookVO book = new BookVO();
 		
-		book = dao.selectBookByBookSeq(bookSeq, bookIsbn);
+		book = dao.selectBookByBookSeq(bookSeq);
+		
+		return book;
+	}
+	
+	public BookVO detailBook(String bookIsbn) {
+		BookVO book = new BookVO();
+		
+		book = dao.selectBookByBookIsbn(bookIsbn);
 		
 		return book;
 	}

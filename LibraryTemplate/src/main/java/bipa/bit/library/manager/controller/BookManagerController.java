@@ -35,10 +35,10 @@ public class BookManagerController {
 	
 	/* 혜윤 개발 시작 */
 	@RequestMapping(value = "/detail.do", method = RequestMethod.GET)
-	public String detailView(Model model, @RequestParam("bookSeq") int bookSeq, @RequestParam("bookIsbn") String bookIsbn) {
+	public String detailView(Model model, @RequestParam("bookSeq") int bookSeq) {
 		BookVO book = new BookVO();
 		
-		book = service.detailBook(bookSeq, bookIsbn);
+		book = service.detailBook(bookSeq);
 		System.out.println("detail book info : " + book.toString());
 		book.setBookContent(book.getBookContent().replaceAll("\r\n", "<br/>"));
 		model.addAttribute("book", book);
@@ -61,7 +61,7 @@ public class BookManagerController {
 		
 		boolean flag = false;
 		
-		BookVO findBook = service.detailBook(book.getBookSeq());
+		BookVO findBook = service.detailBook(book.getBookIsbn());
 		if(findBook != null) {
 			return new ResponseEntity<Boolean>(flag, HttpStatus.FOUND);
 		}
@@ -93,13 +93,7 @@ public class BookManagerController {
 		
 		System.out.println("update book info : " + book.toString());
 		
-		
 		boolean flag = false;
-
-		BookVO findBook = service.detailBook(book.getBookSeq());
-		if(findBook != null) {
-			return new ResponseEntity<Boolean>(flag, HttpStatus.FOUND);
-		}
 		
 		flag = service.updateBook(book);
 		mav.addObject("result", flag);

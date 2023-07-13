@@ -24,8 +24,9 @@
 				}
 			},
 			error: function(error) {
-				console.log(error);
-				alert("저장에 실패했습니다.");
+				if(error.status == 302) {
+					alert("이미 존재하는 도서코드 입니다.");
+				}
 			},
 			beforeSend: function( xhr ) {
 				$("#book_published_date").val($("#book_published_date").val() + " 00:00:00.0");

@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.sql.DataSource;
 
@@ -40,13 +39,18 @@ public class BookManagerDAO {
 		return list;
 	}
 	
-	public BookVO selectBookByBookSeq(int bookSeq, String bookIsbn) {
+	public BookVO selectBookByBookSeq(int bookSeq) {
 		BookVO book = new BookVO();
 		
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("bookSeq", String.valueOf(bookSeq));
-		map.put("bookIsbn", bookIsbn);
 		book = sqlSession.selectOne("mapper.admin.book.selectBookByBookSeq", bookSeq);
+		
+		return book;
+	}
+	
+	public BookVO selectBookByBookIsbn(String bookIsbn) {
+		BookVO book = new BookVO();
+		
+		book = sqlSession.selectOne("mapper.admin.book.selectBookByBookIsbn", bookIsbn);
 		
 		return book;
 	}

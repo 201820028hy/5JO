@@ -42,7 +42,7 @@
 		order by book_category asc
 	</select>
 	
-	<select id="selectBookByBookSeq" parameterType="hashmap" resultMap="adminBookMap" resultType="bookCopyVO">
+	<select id="selectBookByBookSeq" parameterType="int" resultMap="adminBookMap" resultType="bookCopyVO">
 		select
 			(select book_seq from book_copy where book_seq = #{bookSeq}) as book_seq,
 			book_isbn,
@@ -55,6 +55,21 @@
 			book_img
 		from book_info info
 		where book_isbn = (select book_isbn from book_copy where book_seq = #{bookSeq})
+	</select>
+	
+	<select id="selectBookByBookIsbn" parameterType="string" resultMap="adminBookMap" resultType="bookCopyVO">
+		select
+			(select book_seq from book_copy where book_isbn = #{bookIsbn}) as book_seq,
+			book_isbn,
+			book_title,
+			book_author,
+			book_published_date,
+			book_publisher,
+			book_content,
+			book_category,
+			book_img
+		from book_info info
+		where book_isbn = #{bookIsbn}
 	</select>
 	
 	<insert id="insertBookInfo" parameterType="bookCopyVO">
