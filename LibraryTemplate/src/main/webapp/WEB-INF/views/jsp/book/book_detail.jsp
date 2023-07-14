@@ -19,9 +19,128 @@
 </head>
 <body>
 <script>
+let flag = true;
+
+let hiddenPass;
+
 $(document).ready(function(){
-	commentLoad();
+   commentLoad();
+   
+   $(".posted-content").click(function(){
+	   alert($('.posted-content').index(this))
+   });
+   
 });
+
+/* function commentClick(){
+   if(flag){
+      $('.hidden-user-info-area').css('display', "");
+   }
+} */
+
+function commentUpdate(){  
+   alert("update.do?userId=" + $('#comment_id').val() + "&comment_intro=" + $('#comment_intro').text() + "&comment_intro_new=" + $('#comment_intro_update').val());
+   $.ajax({
+         type:"get",
+         url:"update.do?cmtSeq=" + $('#cmtSeq').val() + "&comment_intro_new=" + $('#comment_intro_update').val(),
+         contentType: 'application/x-www-form-urlencoded; charset=euc-kr',
+         success: function(data){
+            console.log(data);
+            flag = true;
+            commentLoad();
+         }
+     })
+}
+
+
+function commentDelete(){
+   $.ajax({
+         type:"get",
+         url:"delete.do?cmtSeq=" + $('#cmtSeq').val(),
+         contentType: 'application/x-www-form-urlencoded; charset=euc-kr',
+         success: function(data){
+         console.log(data);
+         flag = true;
+         commentLoad();
+         }
+     })
+}
+
+
+function commentClick(element) {
+	
+     let comment = element.nextElementSibling;
+    
+  	   let comment2 = element.nextElementSibling.innerHTML;
+		let parser = new DOMParser();
+		let htmlDoc = parser.parseFromString(comment2, 'text/html');
+		let cmtSeqInput = htmlDoc.getElementById('cmtSeq');
+	    cmtSeqValue = cmtSeqInput.value;
+	    
+	    let passInput = comment.querySelector('#hidden-post-password2');
+	    
+	    passInput.addEventListener('input', function() {
+	    	  hiddenPass = passInput.value;
+	    	});
+	    
+     
+     
+     if (comment.style.display === "none" && flag) {
+        comment.style.display = "block";
+        
+     } else {
+        comment.style.display = "none";
+     }
+     
+     
+     
+   }
+
+   function PWCheck() {
+	   
+      $.ajax({
+           type:"POST",
+           url:"getPW.do?cmtSeq="+cmtSeqValue,
+           success: function(data){
+      	   		//console.log(data);
+      	   		console.log(cmtSeqValue);
+      	   		console.log(hiddenPass);
+        	   if(data == hiddenPass){
+        		   console.log($('#cmtSeq').val());
+        		   $('.hidden-user-info-area').css('display', 'none');
+                  $('#updateButton').show();
+                  $('#deleteButton').show();
+                  $('#comment_intro_update').show();
+                  $('#comment_intro').css('display', 'none');
+                  flag = false;
+                  
+               }
+           }
+       })
+   }
+   
+   function registComment(){
+      
+      $.ajax({
+           url:'commentRegistAjax.do',
+           method:'POST',
+           data:$("#post-create-form").serialize(),
+           success: function(response){
+              if(response) {
+                 alert("성공적으로 저장되었습니다.");
+                 commentLoad();
+                 flag=true;
+              }
+           },
+           error:function(error){
+              console.log("error")
+              alert("에러가 발생했습니다.");
+           }
+       })
+      
+   }
+
+
 
 function commentLoad(){
 	
@@ -39,21 +158,25 @@ function commentLoad(){
         		
         		comment.push("<div class='posted-content' onclick='commentClick(this)'>");
         		comment.push("<div class='posted-left'>");
+        		comment.push("<input style='display:none' id='comment_id' value='"+ item.user_id +"'>");
         		comment.push("<h1 class='post-userid-area'>"+ item.user_id +"</h1>");
-        		comment.push("<div class='post-story'>"+ item.cmt_cntn +"</div></div>");
-        		comment.push("<div class='posted-right'>");
+          		comment.push("<div class='post-story'><p id='comment_intro'>"+ item.cmt_cntn +"</p>");
+        		comment.push("<input id='comment_intro_update' style='display:none' value='"+ item.cmt_cntn +"'>");
+        		comment.push("<button style='display:none' id='updateButton' onclick='commentUpdate()'>수정</button>");
+        		comment.push("<button style='display:none' id='deleteButton' onclick='commentDelete()'>삭제</button>");
+        		comment.push("</div></div><div class='posted-right'>");
         		comment.push("<h1>"+ formatted_date +"</h1></div></div>");
         		comment.push("<div class='hidden-user-info-area' style='display: none'>");
-        		comment.push("<form action='' method='post'>");
-        		comment.push("<input type='hidden' name='cmt_seq' value='"+ item.cmt_seq +"'/>");
+        	 	comment.push("<form action='' method='post'>"); 
+        		comment.push("<input type='hidden' id='cmtSeq' name='cmt_seq' value='"+ item.cmt_seq +"'/>");
         		comment.push("<div class='hidden-userid'>");
-        		comment.push("<span class='hidden-userid-title'>아이디 입력: </span>");
-        		comment.push("<input type='text' class='hidden-post-userid' placeholder='id를 입력하세요.'></div>");
-        		comment.push("<div class='hidden-password'>");
+        	/*  comment.push("<span class='hidden-userid-title'>아이디 입력: </span>"); */
+        	/* 	comment.push("<input type='text' class='hidden-post-userid' placeholder='id를 입력하세요.'>"); */
+        		comment.push("</div><div class='hidden-password'>");
         		comment.push("<span class='hidden-password-title'>비밀번호 입력: </span>");
-        		comment.push("<input type='text' class='hidden-post-password' placeholder='pwd를 입력하세요.'></div>");
+        		comment.push("<input type='text' id='hidden-post-password2' value='' class='hidden-post-password' placeholder='pwd를 입력하세요.'></div>");
         		comment.push("<div class='hidden-button'>");
-        		comment.push("<button>확인</button>");
+        		comment.push("<button type='button' onclick='PWCheck()'>확인</button>");
         		comment.push("</div></form></div>");
         		
         	})
@@ -70,40 +193,6 @@ function commentLoad(){
 }
 
 
-function commentClick(element) {
-
-	  let comment = element.nextElementSibling;
-	  
-	  if (comment.style.display === "none") {
-		  comment.style.display = "block";
-	  } else {
-		  comment.style.display = "none";
-	  }
-	}
-
-	function PWCheck() {
-		console.log($('.hidden-post-password').val());
-	}
-	
-	function registComment(){
-		
-		$.ajax({
-	        url:'commentRegistAjax.do',
-	        method:'POST',
-	        data:$("#post-create-form").serialize(),
-	        success: function(response){
-	        	if(response) {
-	        		alert("성공적으로 저장되었습니다.");
-	        		commentLoad();
-	        	}
-	        },
-	        error:function(error){
-	        	console.log("error")
-	        	alert("에러가 발생했습니다.");
-	        }
-	    })
-		
-	}
 	
 </script>
 	<div id="container">
@@ -201,7 +290,7 @@ function commentClick(element) {
 				<div class="content-down">
 					<h1 class="content-title">댓글</h1>
 					<div class="post-create-area">
-						<form action="commentRegist.do" method="post" id="post-create-form">
+						<form action="" method="post" id="post-create-form">
 							<div id="post-create-login">
 							
 							<input type="hidden" id="book_seq" name="book_seq" value="${param.bookSeq}"/>
