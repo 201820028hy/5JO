@@ -39,4 +39,21 @@ public class BookManagerDAO {
 		System.out.println(list);
 		return list;
 	}
+	
+	public boolean deleteBook(int parseInt, String parseString) {
+	    boolean flag = false;
+	    
+	    int affectedCount1 = sqlSession.delete("mapper.admin.book.adminDeleteCopy", parseInt);
+	    
+	    if (affectedCount1 > 0) { // affectedCount1이 실행되었는지 확인
+	        int affectedCount2 = sqlSession.delete("mapper.admin.book.adminDeleteInfo", parseString);
+	        
+	        if (affectedCount2 > 0) { // affectedCount2가 실행되었는지 확인
+	            flag = true;
+	        }
+	    }
+	    
+	    return flag;
+	}
+
 }

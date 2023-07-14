@@ -85,7 +85,7 @@
                                     <th>도서코드</th>
                                     <th>도서명</th>
                                     <th>저자</th>
-                                    <th>출판사</th>
+                                    <!-- <th>출판사</th> -->
                                     <th>출판일</th>
                                     <th>분류</th>
                                     <th>수정</th>
@@ -94,21 +94,21 @@
                             <tbody>
                                 <c:forEach var="list" items="${list}">
 	                                <tr>
-	                                    <td><input type="checkbox" class="delete-checkbox"></td>
-	                                    <td class="book-id">${list.bookSeq}</td>
-	                                    <td>${list.bookIsbn}</td>
-	                                    <td><a href="">${list.bookTitle}</a></td>
-	                                    <td>${list.bookAuthor}</td>
-	                                    <td>${list.bookPublisher}</td>
-	                                    <td>${list.bookPublishDate}</td>
-	                                    <td>${list.bookCategory}</td>
-	                                    <td><a href=""><i class="fa-solid fa-square-pen"></i></a></td>
+	                                    <td class="content-td-area"><input type="checkbox" class="delete-checkbox" name=""></td>
+	                                    <td class="content-td-area book-id">${list.bookSeq}</td>
+	                                    <td class="content-td-area">${list.bookIsbn}</td>
+	                                    <td class="content-td-area"><a href="">${list.bookTitle}</a></td>
+	                                    <td class="content-td-area">${list.bookAuthor}</td>
+	                                    <!-- <td>${list.bookPublisher}</td> -->
+										<td class="content-td-area"><fmt:formatDate value="${list.bookPublishDate}" pattern="yyyy-MM-dd"/> </td>
+	                                    <td class="content-td-area">${list.bookCategory}</td>
+	                                    <td class="content-td-area"><a href=""><i class="fa-solid fa-square-pen"></i></a></td>
 	                                </tr>
 	                            </c:forEach>
                             </tbody>
                         </table>
                     </div>
-                    <div class="page-controller">
+                    <!-- <div class="page-controller">
                         <a href="" class="disabled">이전</a>
                         <ul class="page-numbers">
                             <a href="">
@@ -128,11 +128,84 @@
                             </a>
                         </ul>
                         <a href="">다음</a>
-                    </div>
+                    </div> -->
+                    <div class="page-controller">
+					    <c:if test="${currentPage > 1}">
+					        <a href="?pageNo=${currentPage - 1}">이전</a>
+					    </c:if>
+					    <ul class="page-numbers">
+						    <c:forEach var="pageNumber" begin="1" end="${totalPage}">
+						        <c:choose>
+						            <c:when test="${pageNumber == currentPage}">
+						                <li class="active" data-page="${pageNumber}"><a href="javascript:void(0)">${pageNumber}</a></li>
+						            </c:when>
+						            <c:otherwise>
+						                <li data-page="${pageNumber}"><a href="javascript:void(0)" onclick="showPage(${pageNumber})">${pageNumber}</a></li>
+						            </c:otherwise>
+						        </c:choose>
+						    </c:forEach>
+						</ul>
+
+					    <c:if test="${currentPage < totalPage}">
+					        <a href="?pageNo=${currentPage + 1}">다음</a>
+					    </c:if>
+					</div>
+
                 </div>
             </div>
         </main>
     </div>
+    <script>
+	    window.onload = () => {
+	    	  DeleteApi.getInstance().deleteBookButtonOnclickEvent();
+	    }
+	    
+	    function showPage(pageNumber) {
+	        // 서버에서 해당 페이지 번호에 해당하는 데이터를 가져와서 페이지에 표시하는 로직을 구현
+	        // 필요한 경우 AJAX 요청을 사용하여 비동기적으로 데이터를 가져올 수 있음
+	        // 예시:
+	        location.href = "?pageNo=" + pageNumber; // 페이지 이동 방식으로 구현하는 예시
+	    }
+	    
+	    class DeleteApi {
+	    	  static #instance = null;
+	    	  static getInstance() {
+	    	    if(this.#instance == null) {
+	    	      this.#instance = new DeleteApi();
+	    	    }
+	    	    return this.#instance;
+	    	  }
+	    	  
+	    	  deleteBookButtonOnclickEvent() {
+	    		    const deleteButtonBox = document.querySelector('.delete-button');
+	    		    
+	    		    deleteButtonBox.onclick = () => {
+	    		        const confirmMessage = "정말 삭제하시겠습니까?";
+	    		        if (confirm(confirmMessage)) {
+	    		            const deleteCheckboxes = document.querySelectorAll('.delete-checkbox:checked');
+	    		            const deleteParams = [];
+	    		            
+	    		            
+	    		            deleteCheckboxes.forEach((checkbox) => {
+	    		                const row = checkbox.closest('tr');
+	    		                const bookSeq = row.querySelector('.book-id').textContent;
+	    		                const bookIsbn = row.querySelector('td:nth-child(3)').textContent;
+	    		                deleteParams.push({ bookSeq, bookIsbn });
+	    		                console.log("deleteParams: " + JSON.stringify(deleteParams));
+	    		            });
+	    		            
+	    		            deleteParams.forEach((params) => {
+	    		            	console.log("params: " + JSON.stringify(params));
+	    		                const url = "remove.do?bookSeq=" + params.bookSeq+"&bookIsbn=" + params.bookIsbn;
+	    		                location.href = url;
+	    		            });
+	    		        }
+	    		    }
+	    		}
+
+
+	    }
+    </script>
 </body>
 
 </html>

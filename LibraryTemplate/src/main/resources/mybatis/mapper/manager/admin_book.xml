@@ -32,4 +32,16 @@
          join book_copy copy on info.book_isbn = copy.book_isbn;
 		]]>
 	</select>
+	
+	<select id="adminDeleteCopy" parameterType="java.lang.Integer">
+		<![CDATA[
+			delete from book_copy where book_seq = #{value};
+		]]>
+	</select>
+	
+	<select id="adminDeleteInfo" parameterType="java.lang.String">
+		<![CDATA[
+			delete from book_info where book_isbn = #{value};
+		]]>
+	</select>
 </mapper>

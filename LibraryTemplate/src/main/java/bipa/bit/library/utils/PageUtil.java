@@ -1,6 +1,7 @@
 package bipa.bit.library.utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import bipa.bit.library.book.vo.BookVO;
 
@@ -27,39 +28,44 @@ public class PageUtil {
 	}
 	
 	public ArrayList<BookVO> calculatorPage() {
-		Double totalCountDouble = (double) totalCount;
-		Double pageSizeDouble = (double) pageSize;
-		totalPage = (int) Math.ceil(totalCountDouble / pageSizeDouble);
-		int startIndex = pageNo-1;
-		
-		for(int i = 0; i < pageSize; i++) {
-			if(((startIndex*pageSize) + i) == totalCount) {
-				break;
-			}
-			returnList.add(list.get((startIndex*pageSize) + i));
-		}
-		
-		
-		int slicePage = (int) Math.ceil(totalPage / pageSizeDouble);
-		viewPages = new int[pageSize];
-		int[][] pages = new int[slicePage][pageSize];
-		int forCnt = 1;
-		int index = 0;
-		for(int i = 1; i <= pages.length; i++) {
-			for(int j = 1; j <= pages[i-1].length; j++) {
-				if(forCnt > totalPage) break;
-				pages[i-1][j-1] = forCnt;
-				if(forCnt == pageNo) {
-					index = i-1;
-				}
-				forCnt++;
-			}
-		}
-		
-		viewPages = pages[index];
-		
-		return returnList;
+	    Double totalCountDouble = (double) totalCount;
+	    Double pageSizeDouble = (double) pageSize;
+	    totalPage = (int) Math.ceil(totalCountDouble / pageSizeDouble);
+	    int startIndex = (pageNo - 1) * pageSize;
+
+	    for (int i = 0; i < pageSize; i++) {
+	        if (startIndex + i >= totalCount) {
+	            break;
+	        }
+	        returnList.add(list.get(startIndex + i));
+	    }
+
+	    int slicePage = (int) Math.ceil(totalPage / pageSizeDouble);
+	    viewPages = new int[pageSize];
+	    int[][] pages = new int[slicePage][pageSize];
+	    int forCnt = 1;
+	    int index = 0;
+	    int pageIdx = 0;
+	    for (int i = 0; i < pages.length; i++) {
+	        for (int j = 0; j < pages[i].length; j++) {
+	            if (forCnt > totalPage) {
+	                break;
+	            }
+	            pages[i][j] = forCnt;
+	            if (forCnt == pageNo) {
+	                index = i;
+	                pageIdx = j;
+	            }
+	            forCnt++;
+	        }
+	    }
+
+	    viewPages = Arrays.copyOfRange(pages[index], 0, pageIdx + 1);
+
+	    return returnList;
 	}
+
+
 	
 	public ArrayList<BookVO> getReturnList() {
 		return returnList;
