@@ -63,4 +63,39 @@ public class BookManagerService {
 		
 		return flag;
 	}
+	
+	public boolean updateBookStar(double bookStar, int bookSeq) {
+		boolean flag = false;
+		
+		BookVO book = new BookVO();
+		book.setBookSeq(bookSeq);
+		book.setBookStar(bookStar);
+		int cnt = dao.updateBookStar(book);
+		
+		flag = cnt >= 1 ? true : false;
+		
+		return flag;
+	}
+	
+
+	
+	public boolean updateBookLike(int bookSeq) {
+		boolean flag = false;
+		
+		int cnt = dao.updateBookLike(bookSeq);
+		
+		flag = cnt >= 1 ? true : false;
+		
+		return flag;
+	}
+	
+	public boolean updateBookDlike(int bookSeq) {
+		boolean flag = false;
+		
+		int cnt = dao.updateBookDlike(bookSeq);
+		
+		flag = cnt >= 1 ? true : false;
+		
+		return flag;
+	}
 }

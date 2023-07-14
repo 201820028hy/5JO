@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:set var="path" value="${pageContext.request.contextPath}"/>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,10 +15,10 @@
   crossorigin="anonymous"
   referrerpolicy="no-referrer"
 />
-<link rel="stylesheet" href="${path }/resources/css/reset.css" />
-<link rel="stylesheet" href="${path }/resources/css/common.css" />
-<link rel="stylesheet" href="${path }/resources/css/header.css" />
-<link rel="stylesheet" href="${path }/resources/css/search/search.css" />
+<link rel="stylesheet" href="../resources/css/reset.css" />
+<link rel="stylesheet" href="../resources/css/common.css" />
+<link rel="stylesheet" href="../resources/css/header.css" />
+<link rel="stylesheet" href="../resources/css/userSearch.css" />
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <%-- <script src="${path }/resources/js/account/principal.js"></script>
@@ -33,18 +34,12 @@
 				<div class="category-group">
 					<h2 class="category-title">카테고리</h2>
 					<div class="category-list">
-						<div class="category-item">
-							<input type="checkbox" class="category-checkbox" id="소설"
-								value="소설"> <label for="소설">소설</label>
-						</div>
-						<div class="category-item">
-							<input type="checkbox" class="category-checkbox" id="아동"
-								value="아동"> <label for="아동">아동</label>
-						</div>
-						<div class="category-item">
-							<input type="checkbox" class="category-checkbox" id="경영/경제"
-								value="경영/경제"> <label for="경영/경제">경영/경제</label>
-						</div>
+						<c:forEach items="${categorys }" var="page">
+							<div class="category-item">
+								<input type="checkbox" class="category-checkbox" id="${page }" value="${page }">
+								<label for="${page }">${page }</label>
+							</div>
+						</c:forEach>
 					</div>
 				</div>
 
@@ -56,37 +51,87 @@
 			<div class="content-container">
 				<h1 class="content-title">검색 결과</h1>
 				<div class="content-flex">
-					<div class="info-container">
-						<div class="book-desc">
-							<div class="img-container">
-								<img src="${path }/resources/images/sample.jpg" class="book-img">
+					<c:forEach items="${bookList }" var="book">
+						<div class="info-container">
+							<div class="book-desc">
+								<div class="img-container" onclick="window.location.href = 'detail.do?bookSeq=${book.bookSeq }'" style="cursor: pointer;">
+									<c:choose>
+										<c:when test="${empty book.bookImg }">
+											<img src="../resources/images/no_image.png" class="book-img">
+										</c:when>
+										<c:otherwise>
+											<img src="${book.bookImg }" class="book-img">
+										</c:otherwise>
+									</c:choose>
+								</div>
+								<div class="like-info">
+									<i class="fa-regular fa-thumbs-up"></i><span class="like-count">${book.bookLike }</span>
+								</div>
 							</div>
-							<div class="like-info">
-								<i class="fa-regular fa-thumbs-up"></i><span class="like-count">999</span>
+							<div class="book-info">
+								<div class="book-code">${book.bookIsbn }</div>
+								<a href="detail.do?bookSeq=${book.bookSeq }"><h3 class="book-name">${book.bookTitle }</h3></a>
+								<div class="info-text book-author">
+									<b>저자: </b>${book.bookAuthor }
+								</div>
+								<div class="info-text book-publisher">
+									<b>출판사: </b>${book.bookPublisher }
+								</div>
+								<div class="info-text book-publicationdate">
+									<b>출판일: </b>${book.bookPublishDate }
+								</div>
+								<div class="info-text book-category">
+									<b>카테고리: </b>${book.bookCategory }
+								</div>
+								<div class="info-text book-category">
+									<b>별점: </b>
+									<c:choose>
+										<c:when test="${book.bookStar > 0 }">
+											<fmt:formatNumber value="${book.bookStartCnt}" pattern="#.#" var="starCnt"/>
+											<c:set value="${book.bookStar / starCnt }" var="calStar"/>
+											<c:forEach begin="1" end="5" step="1" var="star">
+												<c:choose>
+													<c:when test="${star <= calStar }">
+														<i class="fa-solid fa-star"></i>
+													</c:when>
+													<c:otherwise>
+														<c:choose>
+															<c:when test="${calStar % (star-1) < 1.0 && calStar % (star-1) != 0.0 }"><!--  || star - (calStar % star) <= 0.5 -->
+															<i class="fa-solid fa-star-half-stroke"></i>
+															</c:when>
+															<c:otherwise>
+																<i class="fa-regular fa-star"></i>
+															</c:otherwise>
+														</c:choose>
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
+										</c:when>
+										<c:otherwise>
+											<i class="fa-regular fa-star"></i>
+											<i class="fa-regular fa-star"></i>
+											<i class="fa-regular fa-star"></i>
+											<i class="fa-regular fa-star"></i>
+											<i class="fa-regular fa-star"></i>
+										</c:otherwise>
+									</c:choose>
+								</div>
 							</div>
 						</div>
-						<div class="book-info">
-							<div class="book-code">소록-990</div>
-							<a href="detail.do?bookSeq=1"><h3 class="book-name">스프링 부트와 AWS로 혼자 구현하는 웹 서비스</h3></a>
-							<div class="info-text book-author">
-								<b>저자: </b>이동욱
-							</div>
-							<div class="info-text book-publisher">
-								<b>출판사: </b>프리렉
-							</div>
-							<div class="info-text book-publicationdate">
-								<b>출판일: </b>2023-01-31
-							</div>
-							<div class="info-text book-category">
-								<b>카테고리: </b>기술/공학
-							</div>
-							<div class="book-buttons">
-								<button type="button" class="rental-button">대여하기</button>
-								<button type="button" class="like-button">추천하기</button>
-							</div>
-						</div>
-					</div>
+					</c:forEach>
 				</div>
+				
+				<div class="page-controller">
+                    <a href="list.do?pageNo=${param.pageNo > 1 ? param.pageNo - 1 : 1 }&pageSize=${param.pageSize}" <c:if test="${param.pageNo <= 1 }">class="disabled"</c:if>>이전</a>
+                    <ul class="page-numbers">
+                    	<c:forEach items="${pages }" var="page">
+                    		<c:if test="${page > 0 }">
+								<li><a href="list.do?pageNo=${page }&pageSize=${param.pageSize}" <c:if test="${page eq param.pageNo }">class="selected"</c:if>>${page }</a></li> 
+							</c:if>
+						</c:forEach>
+                    </ul>
+                    <a href="list.do?pageNo=${pages[param.pageNo + 1] < 1 ? param.pageNo : param.pageNo + 1 }&pageSize=${param.pageSize}" <c:if test="${pages[param.pageNo + 1] < 1 }">class="disabled" disabled</c:if>>다음</a>
+                </div>
 			</div>
 		</main>
 	</div>

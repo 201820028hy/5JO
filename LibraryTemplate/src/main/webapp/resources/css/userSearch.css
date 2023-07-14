@@ -275,3 +275,47 @@
 .dislike-button {
     background-color: #820027;
 }
+
+
+/* 혜윤 작업 시작 */
+.page-controller {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.page-numbers {
+    display: flex;
+}
+
+.page-controller a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0px 5px;
+    border: 1px solid #202020;
+    border-radius: 4px;
+    width: 30px;
+    height: 30px;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.page-controller a:hover {
+    background-color: #202020;
+    color: white;
+}
+
+.page-controller .disabled {
+    background-color: #202020;
+    color: white;
+    cursor: default;
+}
+
+.page-controller .selected {
+    background-color: #202020;
+    color: white;
+    cursor: default;
+}
+/* 혜윤 작업 끝 */

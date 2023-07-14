@@ -44,32 +44,42 @@
 	
 	<select id="selectBookByBookSeq" parameterType="int" resultMap="adminBookMap" resultType="bookCopyVO">
 		select
-			(select book_seq from book_copy where book_seq = #{bookSeq}) as book_seq,
-			book_isbn,
-			book_title,
-			book_author,
-			book_published_date,
-			book_publisher,
-			book_content,
-			book_category,
-			book_img
+			copy.book_seq,
+			info.book_isbn,
+			info.book_title,
+			info.book_author,
+			info.book_published_date,
+			info.book_publisher,
+			info.book_content,
+			info.book_category,
+			info.book_img,
+            copy.book_like,
+            copy.book_dlike,
+            copy.book_star,
+            copy.book_star_cnt
 		from book_info info
-		where book_isbn = (select book_isbn from book_copy where book_seq = #{bookSeq})
+		join book_copy copy on info.book_isbn = copy.book_isbn
+		where copy.book_seq = #{bookSeq}
 	</select>
 	
 	<select id="selectBookByBookIsbn" parameterType="string" resultMap="adminBookMap" resultType="bookCopyVO">
 		select
-			(select book_seq from book_copy where book_isbn = #{bookIsbn}) as book_seq,
-			book_isbn,
-			book_title,
-			book_author,
-			book_published_date,
-			book_publisher,
-			book_content,
-			book_category,
-			book_img
+			copy.book_seq,
+			info.book_isbn,
+			info.book_title,
+			info.book_author,
+			info.info.book_published_date,
+			info.book_publisher,
+			info.book_content,
+			info.book_category,
+			info.book_img,
+            copy.book_like,
+            copy.book_dlike,
+            copy.book_star,
+            copy.book_star_cnt
 		from book_info info
-		where book_isbn = #{bookIsbn}
+		join book_copy copy on info.book_isbn = copy.book_isbn
+		where info.book_isbn = #{bookIsbn}
 	</select>
 	
 	<insert id="insertBookInfo" parameterType="bookCopyVO">
@@ -91,5 +101,24 @@
 			book_category = #{bookCategory},
 			book_img = #{bookImg}
 		where book_isbn = (select book_isbn from book_copy where book_seq = #{bookSeq})
+	</update>
+	
+	<update id="updateBookStar" parameterType="bookCopyVO">
+		update book_copy set
+			book_star = #{bookStar},
+			book_star_cnt = book_star_cnt+1
+		where book_seq = #{bookSeq} 
+	</update>
+	
+	<update id="updateBookLike" parameterType="int">
+		update book_copy set
+			book_like = book_like+1
+		where book_seq = #{bookSeq} 
+	</update>
+	
+	<update id="updateBookDlike" parameterType="int">
+		update book_copy set
+			book_dlike = book_dlike+1
+		where book_seq = #{bookSeq} 
 	</update>
 </mapper>

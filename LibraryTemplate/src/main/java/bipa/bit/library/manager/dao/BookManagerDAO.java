@@ -26,7 +26,7 @@ public class BookManagerDAO {
 //		StringBuilder infoSql = new StringBuilder("select * from book_info info join book_copy copy on info.book_isbn = copy.book_isbn;");
 		
 		list = (ArrayList) sqlSession.selectList("mapper.admin.book.adminSelectAllList");
-		System.out.println(list);
+		
 		return list;
 	}
 	
@@ -70,6 +70,32 @@ public class BookManagerDAO {
 		int cnt = 0;
 		
 		cnt += sqlSession.update("mapper.admin.book.updateBookInfo", book);
+		
+		return cnt;
+	}
+	
+	public int updateBookStar(BookVO book) {
+		int cnt = 0;
+		
+		cnt += sqlSession.update("mapper.admin.book.updateBookStar", book);
+		
+		return cnt;
+	}
+	
+
+	
+	public int updateBookLike(int bookSeq) {
+		int cnt = 0;
+		
+		cnt += sqlSession.update("mapper.admin.book.updateBookLike", bookSeq);
+		
+		return cnt;
+	}
+	
+	public int updateBookDlike(int bookSeq) {
+		int cnt = 0;
+		
+		cnt += sqlSession.update("mapper.admin.book.updateBookDlike", bookSeq);
 		
 		return cnt;
 	}

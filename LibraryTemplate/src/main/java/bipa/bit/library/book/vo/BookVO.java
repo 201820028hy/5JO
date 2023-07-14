@@ -15,12 +15,12 @@ public class BookVO {
 	
 	private int bookLike;
 	private int bookDlike;
-	private int bookStar;
+	private double bookStar;
 	private int bookStartCnt;
 	
 	public BookVO(int bookSeq, String bookIsbn, String bookTitle, String bookAuthor, Date bookPublishDate,
 			String bookPublisher, String bookContent, String bookCategory, String bookImg, int bookLike, int bookDlike,
-			int bookStar, int bookStartCnt) {
+			double bookStar, int bookStartCnt) {
 		super();
 		this.bookSeq = bookSeq;
 		this.bookIsbn = bookIsbn;
@@ -71,7 +71,7 @@ public class BookVO {
 	public int getBookDlike() {
 		return bookDlike;
 	}
-	public int getBookStar() {
+	public double getBookStar() {
 		return bookStar;
 	}
 	public int getBookStartCnt() {
@@ -110,7 +110,7 @@ public class BookVO {
 	public void setBookDlike(int bookDlike) {
 		this.bookDlike = bookDlike;
 	}
-	public void setBookStar(int bookStar) {
+	public void setBookStar(double bookStar) {
 		this.bookStar = bookStar;
 	}
 	public void setBookStartCnt(int bookStartCnt) {

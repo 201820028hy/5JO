@@ -40,8 +40,8 @@ public class PageUtil {
 		}
 		
 		
-		int slicePage = (int) Math.ceil(totalPage / pageSizeDouble);
-		viewPages = new int[pageSize];
+		int slicePage = (int) Math.ceil(totalPage / 5.0);
+		viewPages = new int[5];
 		int[][] pages = new int[slicePage][pageSize];
 		int forCnt = 1;
 		int index = 0;
