@@ -179,15 +179,21 @@
     width: 100%;
 }
 
-.content-table th,
-.content-table td {
-    height: 21px;
+.content-table th {
+    height: 25px;
     text-align: center;
+}
+
+.content-table td {
+	height: 35px;
+	text-align: center;
 }
 
 .content-table td .fa-solid {
     cursor: pointer;
 }
+
+
 
 .page-controller {
     display: flex;

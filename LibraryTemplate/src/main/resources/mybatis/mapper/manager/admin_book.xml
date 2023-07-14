@@ -33,6 +33,7 @@
 		]]>
 	</select>
 	
+
 	<!-- 혜윤 개발 시작 -->
 	<select id="selectAllCategorys" resultType="string">
 		select
@@ -121,4 +122,16 @@
 			book_dlike = book_dlike+1
 		where book_seq = #{bookSeq} 
 	</update>
+
+	<select id="adminDeleteCopy" parameterType="java.lang.Integer">
+		<![CDATA[
+			delete from book_copy where book_seq = #{value};
+		]]>
+	</select>
+	
+	<select id="adminDeleteInfo" parameterType="java.lang.String">
+		<![CDATA[
+			delete from book_info where book_isbn = #{value};
+		]]>
+	</select>
 </mapper>

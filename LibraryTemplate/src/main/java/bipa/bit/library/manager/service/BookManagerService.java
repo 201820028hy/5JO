@@ -106,4 +106,10 @@ public class BookManagerService {
 		
 		return list;
 	}
+	
+    public boolean removeBook(String bookSeq, String bookIsbn) {
+        boolean flag = false;
+        flag = dao.deleteBook(Integer.parseInt(bookSeq), bookIsbn);
+        return flag;
+    }
 }
