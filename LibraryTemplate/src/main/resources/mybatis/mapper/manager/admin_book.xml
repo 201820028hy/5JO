@@ -22,14 +22,14 @@
 	<select id="adminSelectAllList" resultMap="adminBookMap" resultType="bookCopyVO">
 		<![CDATA[
 			 select
-	            copy.book_seq,
-	            info.*,
-	            copy.book_like,
-	            copy.book_dlike,
-	            copy.book_star,
-	            copy.book_star_cnt
-	         from book_info info
-	         join book_copy copy on info.book_isbn = copy.book_isbn;
+            copy.book_seq,
+            info.*,
+            copy.book_like,
+            copy.book_dlike,
+            copy.book_star,
+            copy.book_star_cnt
+         from book_info info
+         join book_copy copy on info.book_isbn = copy.book_isbn;
 		]]>
 	</select>
 	
@@ -68,7 +68,7 @@
 			info.book_isbn,
 			info.book_title,
 			info.book_author,
-			info.info.book_published_date,
+			info.book_published_date,
 			info.book_publisher,
 			info.book_content,
 			info.book_category,

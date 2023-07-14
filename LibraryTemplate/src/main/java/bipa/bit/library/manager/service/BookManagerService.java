@@ -13,7 +13,7 @@ public class BookManagerService {
 	@Autowired
 	private BookManagerDAO dao;
 	
-	public ArrayList<BookVO> asdminSelectAllList() {
+	public ArrayList<BookVO> adminSelectAllList() {
 		ArrayList<BookVO> list = new ArrayList<BookVO>();
 		
 		list = dao.adminSelectAllList();
@@ -97,5 +97,13 @@ public class BookManagerService {
 		flag = cnt >= 1 ? true : false;
 		
 		return flag;
+	}
+	
+	public ArrayList<BookVO> asdminSelectAllList() {
+		ArrayList<BookVO> list = new ArrayList<BookVO>();
+		
+		list = dao.adminSelectAllList();
+		
+		return list;
 	}
 }

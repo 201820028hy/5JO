@@ -46,7 +46,7 @@
                         <a href="">
                             <li>도서 정보 조회</li>
                         </a>
-                        <a href="">
+                        <a href="regist_view.do">
                             <li>도서 정보 등록</li>
                         </a>
                     </ul>
@@ -98,6 +98,7 @@
 	                                    <td class="book-id">${list.bookSeq}</td>
 	                                    <td>${list.bookIsbn}</td>
 	                                    <td><a href="detail.do?bookSeq=${list.bookSeq }">${list.bookTitle}</a></td>
+	                                    <td><a href="">${list.bookTitle}</a></td>
 	                                    <td>${list.bookAuthor}</td>
 	                                    <td>${list.bookPublisher}</td>
 	                                    <td>${list.bookPublishDate}</td>

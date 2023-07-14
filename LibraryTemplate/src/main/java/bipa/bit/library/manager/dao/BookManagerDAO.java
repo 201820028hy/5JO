@@ -23,7 +23,6 @@ public class BookManagerDAO {
 	
 	public ArrayList<BookVO> adminSelectAllList() {
 		ArrayList<BookVO> list = new ArrayList<BookVO>();
-//		StringBuilder infoSql = new StringBuilder("select * from book_info info join book_copy copy on info.book_isbn = copy.book_isbn;");
 		
 		list = (ArrayList) sqlSession.selectList("mapper.admin.book.adminSelectAllList");
 		
@@ -33,9 +32,9 @@ public class BookManagerDAO {
 	/*혜윤 개발 시작*/
 	public ArrayList<String> selectAllCategorys() {
 		ArrayList<String> list = new ArrayList<String>();
-		
+
 		list = (ArrayList) sqlSession.selectList("mapper.admin.book.selectAllCategorys");
-		
+
 		return list;
 	}
 	
