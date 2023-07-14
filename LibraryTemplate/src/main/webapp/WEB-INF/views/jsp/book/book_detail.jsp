@@ -21,17 +21,24 @@
 <script>
 let flag = true;
 
+let hiddenPass;
+
 $(document).ready(function(){
    commentLoad();
+   
+   $(".posted-content").click(function(){
+	   alert($('.posted-content').index(this))
+   });
+   
 });
 
-function commentClick(){
+/* function commentClick(){
    if(flag){
       $('.hidden-user-info-area').css('display', "");
    }
-}
+} */
 
-function commentUpdate(){   
+function commentUpdate(){  
    alert("update.do?userId=" + $('#comment_id').val() + "&comment_intro=" + $('#comment_intro').text() + "&comment_intro_new=" + $('#comment_intro_update').val());
    $.ajax({
          type:"get",
@@ -61,12 +68,25 @@ function commentDelete(){
 
 
 function commentClick(element) {
-
+	
      let comment = element.nextElementSibling;
+    
+  	   let comment2 = element.nextElementSibling.innerHTML;
+		let parser = new DOMParser();
+		let htmlDoc = parser.parseFromString(comment2, 'text/html');
+		let cmtSeqInput = htmlDoc.getElementById('cmtSeq');
+	    cmtSeqValue = cmtSeqInput.value;
+	    
+	    let passInput = comment.querySelector('#hidden-post-password2');
+	    
+	    passInput.addEventListener('input', function() {
+	    	  hiddenPass = passInput.value;
+	    	});
+	    
+     
      
      if (comment.style.display === "none" && flag) {
         comment.style.display = "block";
-     //   $('.hidden-user-info-area').css('display', "");   
         
      } else {
         comment.style.display = "none";
@@ -77,12 +97,15 @@ function commentClick(element) {
    }
 
    function PWCheck() {
+	   
       $.ajax({
            type:"POST",
-           url:"getPW.do?cmtSeq="+$('#cmtSeq').val(),
+           url:"getPW.do?cmtSeq="+cmtSeqValue,
            success: function(data){
-              console.log(data);
-        	   if(data == $('#hidden-post-password').val()){
+      	   		//console.log(data);
+      	   		console.log(cmtSeqValue);
+      	   		console.log(hiddenPass);
+        	   if(data == hiddenPass){
         		   console.log($('#cmtSeq').val());
         		   $('.hidden-user-info-area').css('display', 'none');
                   $('#updateButton').show();
@@ -151,7 +174,7 @@ function commentLoad(){
         	/* 	comment.push("<input type='text' class='hidden-post-userid' placeholder='id를 입력하세요.'>"); */
         		comment.push("</div><div class='hidden-password'>");
         		comment.push("<span class='hidden-password-title'>비밀번호 입력: </span>");
-        		comment.push("<input type='text' id='hidden-post-password' class='hidden-post-password' placeholder='pwd를 입력하세요.'></div>");
+        		comment.push("<input type='text' id='hidden-post-password2' value='' class='hidden-post-password' placeholder='pwd를 입력하세요.'></div>");
         		comment.push("<div class='hidden-button'>");
         		comment.push("<button type='button' onclick='PWCheck()'>확인</button>");
         		comment.push("</div></form></div>");
