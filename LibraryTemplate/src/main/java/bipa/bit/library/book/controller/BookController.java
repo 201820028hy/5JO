@@ -25,7 +25,7 @@ import bipa.bit.library.utils.PageUtil;
 @Controller
 @RequestMapping("/book")
 public class BookController {
-	
+
 	@Autowired
 	private BookService service;
 	
@@ -39,13 +39,18 @@ public class BookController {
 		String pageNoStr = request.getParameter("pageNo");
 		String pageSizeStr = request.getParameter("pageSize");
 		int pageNo = pageNoStr == null || pageNoStr.isBlank() ? 1 : Integer.parseInt(pageNoStr);
-		int pageSize = pageSizeStr == null || pageSizeStr.isBlank() ? 10 : Integer.parseInt(pageSizeStr);
+		int pageSize = pageSizeStr == null || pageSizeStr.isBlank() ? 12 : Integer.parseInt(pageSizeStr);
 		
-		PageUtil page = PageUtil.getInstance(pageNo, pageSize, bookList);
-		ArrayList<BookVO> pagingList = page.calculatorPage();
-		int[] pages = page.getViewPages();
-		model.addAttribute("bookList", pagingList);
-		model.addAttribute("pages", pages);
+		// PageUtil을 사용하여 페이징 처리
+	    PageUtil pageUtil = PageUtil.getInstance(pageNo, pageSize, bookList);
+	    ArrayList<BookVO> paginatedList = pageUtil.calculatorPage();
+	    int[] viewPages = pageUtil.getViewPages();
+	    int totalPage = pageUtil.getTotalPage();
+	    
+	    model.addAttribute("list", paginatedList);
+	    model.addAttribute("viewPages", viewPages);
+	    model.addAttribute("totalPage", totalPage);
+	    model.addAttribute("currentPage", pageNo);
 		
 		ArrayList<String> categorys = adminService.selectAllCategorys();
 		model.addAttribute("categorys", categorys);
@@ -63,42 +68,40 @@ public class BookController {
 
 		mav.addObject("book",book);
 		mav.addObject("bookComment",list);
+
 		mav.setViewName("./jsp/book/book_detail");
-		
+
 		return mav;
 	}
-	
-	
+
 	@RequestMapping(value = "/detailAjax.do", method = RequestMethod.GET)
 	public @ResponseBody ResponseEntity<ArrayList<CommentVO>> detailAjax(@RequestParam("bookSeq") String bookSeq) {
 		System.out.println("detailAjax");
 
 		ArrayList<CommentVO> list = service.searchBookComment(bookSeq);
-		
-		System.out.println(list.get(0).getInput_dt());
+
 		return new ResponseEntity<ArrayList<CommentVO>>(list, HttpStatus.OK);
 	}
-	
-	
+
 	@RequestMapping(value = "/commentRegist.do", method = RequestMethod.POST)
 	public ModelAndView commentRegist(@ModelAttribute CommentVO comment) {
 		ModelAndView mav = new ModelAndView();
 		System.out.println("commentRegist");
 		System.out.println(comment);
 		service.registComment(comment);
-		
-		mav.setViewName("redirect:./detail.do?bookSeq="+comment.getBook_seq());
-	
+
+		mav.setViewName("redirect:./detail.do?bookSeq=" + comment.getBook_seq());
+
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/commentRegistAjax.do", method = RequestMethod.POST)
 	public @ResponseBody ResponseEntity<Boolean> commentRegistAjax(@ModelAttribute CommentVO comment) {
 		System.out.println("commentRegistAjax");
 		System.out.println(comment);
 		boolean flag = false;
 		flag = service.registComment(comment);
-	
+
 		return new ResponseEntity<Boolean>(flag, HttpStatus.OK);
 	}
 	
@@ -133,5 +136,25 @@ public class BookController {
 		flag = adminService.updateBookDlike(bookSeq);
 	
 		return new ResponseEntity<Boolean>(flag, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/getPW.do", method = RequestMethod.POST)
+	public @ResponseBody String pw(@RequestParam("cmtSeq") String cmtSeq) {
+		System.out.println("getPWcheck");
+		
+		CommentVO result = service.getPW(cmtSeq);
+		System.out.println(result.getPwd());
+		return result.getPwd();
+	}
+
+	@RequestMapping(value = "/delete.do", method = RequestMethod.GET)
+	public @ResponseBody void delete(@RequestParam("cmtSeq") String cmtSeq) {
+		service.delete(cmtSeq);
+	}
+
+	@RequestMapping(value = "/update.do", method = RequestMethod.GET)
+	public @ResponseBody void update(@RequestParam("cmtSeq") String cmtSeq,
+			@RequestParam("comment_intro_new") String comment_intro_new) {
+		service.update(cmtSeq, comment_intro_new);
 	}
 }

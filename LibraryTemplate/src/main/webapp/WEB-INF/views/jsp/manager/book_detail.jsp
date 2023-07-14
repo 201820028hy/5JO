@@ -17,7 +17,7 @@
 <body>
 	<div id="container">
         <header class="header-container">
-            <h1 class="brand-logo"><a href="../book/list.do?pageNo=1&pageSize=10">BipaLibrary</a></h1>
+            <h1 class="brand-logo"><a href="../book/list.do?pageNo=1&pageSize=12">BipaLibrary</a></h1>
         </header>
       <main class="main-container">
         <aside class="left-aside">

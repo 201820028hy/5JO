@@ -51,7 +51,7 @@
 			<div class="content-container">
 				<h1 class="content-title">검색 결과</h1>
 				<div class="content-flex">
-					<c:forEach items="${bookList }" var="book">
+					<c:forEach items="${list }" var="book">
 						<div class="info-container">
 							<div class="book-desc">
 								<div class="img-container" onclick="window.location.href = 'detail.do?bookSeq=${book.bookSeq }'" style="cursor: pointer;">
@@ -120,17 +120,14 @@
 						</div>
 					</c:forEach>
 				</div>
-				
 				<div class="page-controller">
-                    <a href="list.do?pageNo=${param.pageNo > 1 ? param.pageNo - 1 : 1 }&pageSize=${param.pageSize}" <c:if test="${param.pageNo <= 1 }">class="disabled"</c:if>>이전</a>
+                    <a href="list.do?pageNo=${currentPage > 1 ? currentPage - 1 : 1 }&pageSize=${param.pageSize}" <c:if test="${currentPage <= 1 }">class="disabled"</c:if>>이전</a>
                     <ul class="page-numbers">
-                    	<c:forEach items="${pages }" var="page">
-                    		<c:if test="${page > 0 }">
-								<li><a href="list.do?pageNo=${page }&pageSize=${param.pageSize}" <c:if test="${page eq param.pageNo }">class="selected"</c:if>>${page }</a></li> 
-							</c:if>
-						</c:forEach>
+						    <c:forEach var="pageNumber" begin="1" end="${totalPage}">
+								<li><a href="list.do?pageNo=${pageNumber }&pageSize=${param.pageSize}" <c:if test="${pageNumber == currentPage }">class="selected"</c:if>>${pageNumber }</a></li> 
+							</c:forEach>
                     </ul>
-                    <a href="list.do?pageNo=${pages[param.pageNo + 1] < 1 ? param.pageNo : param.pageNo + 1 }&pageSize=${param.pageSize}" <c:if test="${pages[param.pageNo + 1] < 1 }">class="disabled" disabled</c:if>>다음</a>
+                    <a href="list.do?pageNo=${currentPage < totalPage ? param.pageNo + 1 : param.pageNo }&pageSize=${param.pageSize}" <c:if test="${pages[param.pageNo + 1] < 1 }">class="disabled" disabled</c:if>>다음</a>
                 </div>
 			</div>
 		</main>
