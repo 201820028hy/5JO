@@ -11,6 +11,11 @@
 <link rel="stylesheet" href="../resources/css/adminBookModification.css" />
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
+	$(function() {
+		$("#book_published_date").val("2023-07-14");
+	})
+	
+	
 	function registBook() {
 		$.ajax({
 			url: "regist.do",
@@ -26,6 +31,7 @@
 			error: function(error) {
 				if(error.status == 302) {
 					alert("이미 존재하는 도서코드 입니다.");
+					$("#book_published_date").val("2023-07-14");
 				}
 			},
 			beforeSend: function( xhr ) {

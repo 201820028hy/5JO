@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -77,12 +78,23 @@
 	                                    <td class="content-td-area"><input type="checkbox" class="delete-checkbox" name=""></td>
 	                                    <td class="content-td-area book-id">${list.bookSeq}</td>
 	                                    <td class="content-td-area">${list.bookIsbn}</td>
-	                                    <td class="content-td-area"><a href="detail.do?bookSeq=${list.bookSeq }">${list.bookTitle}</a></td>
+	                                    <td class="content-td-area" style="text-align:left;padding-left:5px;">
+	                                    	<a href="detail.do?bookSeq=${list.bookSeq }">
+	                                    		<c:choose>
+	                                    			<c:when test="${fn:length(list.bookTitle) > 30}">
+	                                    				${fn:substring(list.bookTitle, 0, 30)}...
+	                                    			</c:when>
+	                                    			<c:otherwise>
+	                                    				${list.bookTitle }
+	                                    			</c:otherwise>
+	                                    		</c:choose>
+	                                    	</a>
+	                                    </td>
 	                                    <td class="content-td-area">${list.bookAuthor}</td>
 	                                    <!-- <td>${list.bookPublisher}</td> -->
 										<td class="content-td-area"><fmt:formatDate value="${list.bookPublishDate}" pattern="yyyy-MM-dd"/> </td>
 	                                    <td class="content-td-area">${list.bookCategory}</td>
-	                                    <td class="content-td-area"><a href=""><i class="fa-solid fa-square-pen"></i></a></td>
+	                                    <td class="content-td-area"><a href="update_view.do?bookSeq=${list.bookSeq }"><i class="fa-solid fa-square-pen"></i></a></td>
 	                                </tr>
 	                            </c:forEach>
                             </tbody>

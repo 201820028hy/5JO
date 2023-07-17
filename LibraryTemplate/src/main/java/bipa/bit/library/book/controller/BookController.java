@@ -64,6 +64,11 @@ public class BookController {
 		ModelAndView mav = new ModelAndView();
 		
 		BookVO book = adminService.detailBook(Integer.parseInt(bookSeq));
+
+		if(book.getBookContent() != null) {
+			book.setBookContent(book.getBookContent().replaceAll("\r\n", "<br/>"));
+		}
+		
 		ArrayList<CommentVO> list = service.searchBookComment(bookSeq);
 
 		mav.addObject("book",book);

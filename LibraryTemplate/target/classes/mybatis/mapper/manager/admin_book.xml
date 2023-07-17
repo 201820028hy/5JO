@@ -29,7 +29,8 @@
             copy.book_star,
             copy.book_star_cnt
          from book_info info
-         join book_copy copy on info.book_isbn = copy.book_isbn;
+         join book_copy copy on info.book_isbn = copy.book_isbn
+         order by copy.book_seq desc
 		]]>
 	</select>
 	

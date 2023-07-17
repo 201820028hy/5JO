@@ -28,7 +28,7 @@ $(document).ready(function(){
    commentLoad();
    
    $(".posted-content").click(function(){
-	   alert($('.posted-content').index(this))
+	   //alert($('.posted-content').index(this))
    });
    
 });
@@ -40,13 +40,14 @@ $(document).ready(function(){
 } */
 
 function commentUpdate(){  
-   alert("update.do?userId=" + $('#comment_id').val() + "&comment_intro=" + $('#comment_intro').text() + "&comment_intro_new=" + $('#comment_intro_update').val());
+   //alert("update.do?userId=" + $('#comment_id').val() + "&comment_intro=" + $('#comment_intro').text() + "&comment_intro_new=" + $('#comment_intro_update').val());
    $.ajax({
          type:"get",
          url:"update.do?cmtSeq=" + $('#cmtSeq').val() + "&comment_intro_new=" + $('#comment_intro_update').val(),
          contentType: 'application/x-www-form-urlencoded; charset=euc-kr',
          success: function(data){
             console.log(data);
+            alert("성공적으로 수정되었습니다.");
             flag = true;
             commentLoad();
          }
@@ -55,6 +56,9 @@ function commentUpdate(){
 
 
 function commentDelete(){
+	if(!confirm("삭제하시겠습니까?")) {
+		return false;
+	}
    $.ajax({
          type:"get",
          url:"delete.do?cmtSeq=" + $('#cmtSeq').val(),
@@ -103,11 +107,7 @@ function commentClick(element) {
            type:"POST",
            url:"getPW.do?cmtSeq="+cmtSeqValue,
            success: function(data){
-      	   		//console.log(data);
-      	   		console.log(cmtSeqValue);
-      	   		console.log(hiddenPass);
         	   if(data == hiddenPass){
-        		   console.log($('#cmtSeq').val());
         		   $('.hidden-user-info-area').css('display', 'none');
                   $('#updateButton').show();
                   $('#deleteButton').show();
@@ -144,7 +144,9 @@ function commentClick(element) {
 
 
 function commentLoad(){
-	
+	$("#user_id").val("");
+	$("#pwd").val("");
+	$("#cmt_cntn").val("");
 	$.ajax({
         url:'detailAjax.do?bookSeq='+$('#book_seq').val(),
         method:'GET',
@@ -175,7 +177,7 @@ function commentLoad(){
         	/* 	comment.push("<input type='text' class='hidden-post-userid' placeholder='id를 입력하세요.'>"); */
         		comment.push("</div><div class='hidden-password'>");
         		comment.push("<span class='hidden-password-title'>비밀번호 입력: </span>");
-        		comment.push("<input type='text' id='hidden-post-password2' value='' class='hidden-post-password' placeholder='pwd를 입력하세요.'></div>");
+        		comment.push("<input type='password' id='hidden-post-password2' value='' class='hidden-post-password' placeholder='pwd를 입력하세요.'></div>");
         		comment.push("<div class='hidden-button'>");
         		comment.push("<button type='button' onclick='PWCheck()'>확인</button>");
         		comment.push("</div></form></div>");
@@ -423,7 +425,7 @@ function commentLoad(){
 								</div>
 								<div class="hidden-password">
 									<span class="hidden-password-title">비밀번호 입력: </span> <input id="pwd" name="pwd"
-										type="text" class="hidden-post-password"
+										type="password" class="hidden-post-password"
 										placeholder="pwd를 입력하세요.">
 								</div>
 							</div>
@@ -435,7 +437,7 @@ function commentLoad(){
 									placeholder="...내용을 입력해주세요">
 								<div class="review-area">
 								<!-- 	<button type="submit" class="post-create-button">댓글 등록</button> -->
-									<button onclick="registComment()" type="button" class="post-create-button">댓글 등록2</button>
+									<button onclick="registComment()" type="button" class="post-create-button">댓글 등록</button>
 								</div>
 							</div>
 						</form>
